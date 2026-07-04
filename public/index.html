@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+<title>Company Research Assistant</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark">◎</span>
+      <span class="brand-name">Company Research Assistant</span>
+    </div>
+
+    <button id="newChatBtn" class="side-btn primary">＋ New research</button>
+
+    <div class="side-section">
+      <span class="side-label">Model</span>
+      <input list="modelList" id="modelInput" class="side-input mono" value="openai/gpt-4o-mini" spellcheck="false" />
+      <datalist id="modelList"></datalist>
+    </div>
+
+    <div class="side-section history-section">
+      <span class="side-label">Recent</span>
+      <div id="historyList" class="history-list">
+        <p class="empty-hint">Your researched companies will appear here.</p>
+      </div>
+    </div>
+
+    <button id="settingsBtn" class="side-btn ghost">⚙ Discord integration</button>
+  </aside>
+
+  <!-- Main chat column -->
+  <main class="main">
+    <header class="topbar">
+      <div class="topbar-title">
+        <h1>Company Research Assistant</h1>
+        <p>Give me a company name or a website — I'll crawl, search, and build a report.</p>
+      </div>
+    </header>
+
+    <section id="chat" class="chat">
+      <div class="welcome" id="welcome">
+        <div class="welcome-mark">◎</div>
+        <h2>Who are we researching today?</h2>
+        <p>Try <button class="chip" data-fill="Stripe">Stripe</button>
+           <button class="chip" data-fill="Tesla">Tesla</button>
+           <button class="chip" data-fill="https://linear.app">https://linear.app</button></p>
+      </div>
+    </section>
+
+    <form id="composer" class="composer">
+      <input
+        id="queryInput"
+        type="text"
+        autocomplete="off"
+        placeholder="Enter a company name or website URL (e.g. Stripe, or https://stripe.com)"
+      />
+      <button type="submit" id="sendBtn">
+        <span class="send-label">Research</span>
+        <span class="arrow">→</span>
+      </button>
+    </form>
+  </main>
+</div>
+
+<!-- Discord settings modal -->
+<div id="settingsModal" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Discord Integration</h3>
+      <button id="closeSettings" class="icon-btn">✕</button>
+    </div>
+    <p class="modal-desc">When configured, every generated report is automatically posted — with the PDF attached — to this Discord channel.</p>
+
+    <label class="field-label">Applicant name</label>
+    <input id="applicantName" class="field-input" placeholder="Your full name" />
+
+    <label class="field-label">Applicant email</label>
+    <input id="applicantEmail" class="field-input" placeholder="you@example.com" />
+
+    <label class="field-label">Discord bot token</label>
+    <input id="botToken" class="field-input mono" type="password" placeholder="Bot token provided by evaluator" />
+
+    <label class="field-label">Discord channel ID</label>
+    <input id="channelId" class="field-input mono" placeholder="e.g. 123456789012345678" />
+
+    <div class="modal-status" id="settingsStatus"></div>
+
+    <div class="modal-actions">
+      <button id="clearSettings" class="side-btn ghost small">Remove config</button>
+      <button id="saveSettings" class="side-btn primary small">Save configuration</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
