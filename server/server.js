@@ -271,6 +271,10 @@ app.get("/api/report/:id/download", (req, res) => {
 
 app.get("/api/health", (req, res) => res.json({ ok: true }));
 
-app.listen(PORT, () => {
-  console.log(`\n🚀 Company Research Assistant running at http://localhost:${PORT}\n`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`🚀 Company Research Assistant running at http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
