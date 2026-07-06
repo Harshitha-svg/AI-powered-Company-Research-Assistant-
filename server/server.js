@@ -271,9 +271,13 @@ app.get("/api/report/:id/download", (req, res) => {
 
 app.get("/api/health", (req, res) => res.json({ ok: true }));
 
-if (require.main === module) {
+// Only start a real listening server when running locally / on a normal
+// Node host (Render, Railway, etc). On Vercel, this file is required by
+// api/index.js and the exported `app` is invoked per-request instead —
+// calling app.listen() there would crash the serverless function.
+if (!process.env.VERCEL) {
   app.listen(PORT, () => {
-    console.log(`🚀 Company Research Assistant running at http://localhost:${PORT}`);
+    console.log(`\n🚀 Company Research Assistant running at http://localhost:${PORT}\n`);
   });
 }
 
