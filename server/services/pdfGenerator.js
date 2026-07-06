@@ -2,7 +2,11 @@ const PDFDocument = require("pdfkit");
 const fs = require("fs");
 const path = require("path");
 
-const REPORTS_DIR = path.join(__dirname, "..", "data", "reports");
+// Vercel's filesystem is read-only except /tmp — use it there, otherwise
+// keep writing next to the project like before.
+const REPORTS_DIR = process.env.VERCEL
+  ? path.join("/tmp", "reports")
+  : path.join(__dirname, "..", "data", "reports");
 if (!fs.existsSync(REPORTS_DIR)) fs.mkdirSync(REPORTS_DIR, { recursive: true });
 
 function safeFileName(name) {
