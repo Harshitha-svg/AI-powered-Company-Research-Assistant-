@@ -3,7 +3,13 @@ const FormData = require("form-data");
 const fs = require("fs");
 const path = require("path");
 
-const CONFIG_PATH = path.join(__dirname, "..", "data", "discord-config.json");
+// Vercel's filesystem is read-only except /tmp — use it there. Note that
+// /tmp is ephemeral per-invocation on Vercel, so this config won't persist
+// across requests there; for a durable deployment, store this in an env
+// var or a small external store instead.
+const CONFIG_PATH = process.env.VERCEL
+  ? path.join("/tmp", "discord-config.json")
+  : path.join(__dirname, "..", "data", "discord-config.json");
 
 function loadConfig() {
   try {
