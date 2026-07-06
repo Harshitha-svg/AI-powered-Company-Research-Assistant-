@@ -1,4 +1,5 @@
 # Company Research Assistant
+**Live demo:** [Company Research Assistant](https://ai-powered-company-research-assista.vercel.app/)
 
 An AI-powered company research assistant. Give it a company name or a website
 URL and it will:
